@@ -76,7 +76,8 @@ function UsersTable() {
           <Thead>
             <Tr>
               <Th width="20%">Full name</Th>
-              <Th width="50%">Email</Th>
+              <Th width="30%">Email</Th>
+              <Th width="20%">Phone</Th>
               <Th width="10%">Role</Th>
               <Th width="10%">Status</Th>
               <Th width="10%">Actions</Th>
@@ -110,6 +111,9 @@ function UsersTable() {
                   </Td>
                   <Td isTruncated maxWidth="150px">
                     {user.email}
+                  </Td>
+                  <Td isTruncated maxWidth="150px">
+                    {user.phone}
                   </Td>
                   <Td>{user.is_superuser ? "Superuser" : "User"}</Td>
                   <Td>

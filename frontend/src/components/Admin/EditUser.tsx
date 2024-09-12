@@ -25,6 +25,7 @@ import {
 } from "../../client"
 import useCustomToast from "../../hooks/useCustomToast"
 import { emailPattern, handleError } from "../../utils"
+import validator from 'validator' 
 
 interface EditUserProps {
   user: UserPublic
@@ -110,6 +111,24 @@ const EditUser = ({ user, isOpen, onClose }: EditUserProps) => {
             <FormControl mt={4}>
               <FormLabel htmlFor="name">Full name</FormLabel>
               <Input id="name" {...register("full_name")} type="text" />
+            </FormControl>
+            <FormControl mt={4} isRequired isInvalid={!!errors.phone}>
+              <FormLabel htmlFor="phone">Phone</FormLabel>
+              <Input
+                id="phone"
+                {...register("phone", {
+                  validate: (value : any) =>
+                    validator.isMobilePhone(value) ||
+                    "The phone is not valid",
+                })}
+                placeholder="Phone"
+                type="text"
+              />
+              {errors.phone && (
+                <FormErrorMessage>
+                  {errors.phone.message}
+                </FormErrorMessage>
+              )}
             </FormControl>
             <FormControl mt={4} isInvalid={!!errors.password}>
               <FormLabel htmlFor="password">Set Password</FormLabel>

@@ -21,6 +21,7 @@ import { type UserCreate, UsersService } from "../../client"
 import type { ApiError } from "../../client/core/ApiError"
 import useCustomToast from "../../hooks/useCustomToast"
 import { emailPattern, handleError } from "../../utils"
+import validator from 'validator' 
 
 interface AddUserProps {
   isOpen: boolean
@@ -47,6 +48,7 @@ const AddUser = ({ isOpen, onClose }: AddUserProps) => {
       email: "",
       full_name: "",
       password: "",
+      phone: "",
       confirm_password: "",
       is_superuser: false,
       is_active: false,
@@ -111,6 +113,24 @@ const AddUser = ({ isOpen, onClose }: AddUserProps) => {
               />
               {errors.full_name && (
                 <FormErrorMessage>{errors.full_name.message}</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl mt={4} isRequired isInvalid={!!errors.phone}>
+              <FormLabel htmlFor="phone">Phone</FormLabel>
+              <Input
+                id="phone"
+                {...register("phone", {
+                  validate: (value : any) =>
+                    validator.isMobilePhone(value) ||
+                    "The phone is not valid",
+                })}
+                placeholder="Phone"
+                type="text"
+              />
+              {errors.phone && (
+                <FormErrorMessage>
+                  {errors.phone.message}
+                </FormErrorMessage>
               )}
             </FormControl>
             <FormControl mt={4} isRequired isInvalid={!!errors.password}>

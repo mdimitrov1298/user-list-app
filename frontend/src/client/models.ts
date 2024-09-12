@@ -57,6 +57,7 @@ export type UserCreate = {
   is_active?: boolean
   is_superuser?: boolean
   full_name?: string | null
+  phone?: string | null
   password: string
 }
 
@@ -65,6 +66,7 @@ export type UserPublic = {
   is_active?: boolean
   is_superuser?: boolean
   full_name?: string | null
+  phone?: string | null
   id: string
 }
 
@@ -79,6 +81,7 @@ export type UserUpdate = {
   is_active?: boolean
   is_superuser?: boolean
   full_name?: string | null
+  phone?: string | null
   password?: string | null
 }
 
